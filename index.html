@@ -213,6 +213,10 @@ details.more[open] summary{margin-bottom:16px}
 .ask{margin:8px 0 0;max-width:38em}
 a.btn{display:inline-block;font-weight:700;font-size:16px;line-height:1.4;text-decoration:none;color:var(--bg);background:var(--blue);padding:13px 24px;border-radius:999px;margin:6px 0 0}
 a.btn:hover{filter:brightness(1.08)}
+
+.float-ask{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;display:inline-block;font-weight:700;font-size:15px;line-height:1.4;text-decoration:none;color:var(--bg);background:var(--blue);padding:12px 20px;border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.28);opacity:0;pointer-events:none;transform:translateY(10px)}
+.float-ask.is-show{opacity:1;pointer-events:auto;transform:none}
+@media (prefers-reduced-motion:no-preference){.float-ask{transition:opacity .25s ease,transform .25s ease}}
 </style>
 </head>
 <body>
@@ -562,6 +566,22 @@ a.btn:hover{filter:brightness(1.08)}
       bs.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
     })});
   });
+})();
+</script>
+<a class="float-ask" id="floatAsk" href="https://docs.google.com/forms/d/e/1FAIpQLSeGQr8TnhJT7swyHMz7apE_-k87i1MA2Q1uLOKetnZNSvw6-A/viewform" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">質問する</a>
+<script>
+(function(){
+  var b=document.getElementById('floatAsk'),hero=document.querySelector('.hero'),c=document.getElementById('contact');
+  if(!b||!hero||!c||!('IntersectionObserver' in window))return;
+  var heroOut=false,contactIn=false;
+  function upd(){
+    var s=heroOut&&!contactIn;
+    b.classList.toggle('is-show',s);
+    b.setAttribute('aria-hidden',s?'false':'true');
+    b.tabIndex=s?0:-1;
+  }
+  new IntersectionObserver(function(e){heroOut=!e[0].isIntersecting;upd()}).observe(hero);
+  new IntersectionObserver(function(e){contactIn=e[0].isIntersecting;upd()}).observe(c);
 })();
 </script>
 </body>
