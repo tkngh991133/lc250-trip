@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="ランクル250で釣り旅。自作ベッドキットを組んだまま出発する車中泊の記録と、設計図・部品表・費用。">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ランクル250で釣り旅。ベッドは組んだまま出発する。</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF2F1; --paper:#F8FAF9; --ink:#12252C; --sub:#4A5F66; --line:#C9D5D3;
+  --blue:#1F6E8C; --blue-soft:#DCEBF0; --signal:#C93C32;
+  --display:"Dela Gothic One","Hiragino Sans","Yu Gothic",sans-serif;
+  --body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0D1A1F;--paper:#13242B;--ink:#E4EDEB;--sub:#97ADB3;--line:#26404A;--blue:#6FB6D0;--blue-soft:#17323D;--signal:#F0716A;}
+}
+:root[data-theme="dark"]{--bg:#0D1A1F;--paper:#13242B;--ink:#E4EDEB;--sub:#97ADB3;--line:#26404A;--blue:#6FB6D0;--blue-soft:#17323D;--signal:#F0716A;}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.95;font-weight:400}
+img{max-width:100%;display:block}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* hero */
+.hero{position:relative;min-height:88vh;min-height:88svh;display:flex;align-items:flex-end;color:#fff;background:#0b1519}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(8,16,20,.92) 0%,rgba(8,16,20,.55) 38%,rgba(8,16,20,.05) 70%)}
+.hero-in{position:relative;z-index:1;width:100%;max-width:960px;margin:0 auto;padding:0 22px 44px}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(30px,7.2vw,60px);line-height:1.28;margin:0 0 16px;letter-spacing:.01em}
+.hero p{margin:0;max-width:34em;font-size:16px;line-height:1.8;color:#DCE7E5}
+
+main{max-width:960px;margin:0 auto;padding:0 22px}
+section{padding:68px 0 8px}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(23px,4.6vw,34px);line-height:1.4;margin:0 0 22px}
+h3{font-size:18px;font-weight:700;margin:34px 0 8px}
+p{margin:0 0 1.1em;max-width:38em}
+.sub{color:var(--sub)}
+
+/* flow */
+.flow{list-style:none;margin:30px 0 0;padding:0;border-left:3px solid var(--blue)}
+.flow li{position:relative;padding:2px 0 26px 24px}
+.flow li::before{content:"";position:absolute;left:-9px;top:10px;width:15px;height:15px;border-radius:50%;background:var(--bg);border:3px solid var(--blue)}
+.flow b{display:block;font-size:19px}
+.flow span{color:var(--sub);font-size:15.5px;line-height:1.75;display:block;max-width:34em}
+.flow li.start::before{background:var(--signal);border-color:var(--signal)}
+
+/* photos */
+figure{margin:0}
+figcaption{font-size:14px;line-height:1.6;color:var(--sub);padding-top:8px}
+.pair{display:grid;gap:18px;grid-template-columns:1fr;margin:30px 0}
+@media(min-width:720px){.pair{grid-template-columns:1fr 1fr}}
+.pair img,.wide img{width:100%;height:auto;border-radius:4px}
+.wide{margin:30px 0}
+.trio{display:grid;gap:14px;grid-template-columns:repeat(3,1fr);margin:30px 0}
+.trio img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:4px}
+@media(max-width:560px){.trio{grid-template-columns:1fr 1fr}.trio figure:last-child{grid-column:1/-1}.trio figure:last-child img{aspect-ratio:16/10}}
+
+/* facts */
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:0;margin:26px 0 8px;border-top:2px solid var(--ink)}
+@media(min-width:720px){.facts{grid-template-columns:repeat(4,1fr)}}
+.facts div{padding:14px 12px 14px 0;border-bottom:1px solid var(--line)}
+.facts dt{font-size:13.5px;color:var(--sub);line-height:1.4}
+.facts dd{margin:4px 0 0;font-family:var(--display);font-size:22px;line-height:1.3}
+
+/* diagram */
+.scroll{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:4px;-webkit-overflow-scrolling:touch}
+.scroll img{min-width:760px;width:100%;height:auto}
+.hint{font-size:13.5px;color:var(--sub);margin:6px 0 0}
+.tag{display:inline-block;font-size:13.5px;font-weight:700;color:var(--blue);background:var(--blue-soft);padding:2px 10px;border-radius:3px;margin-bottom:10px}
+
+.change{list-style:none;margin:10px 0 0;padding:0;max-width:38em}
+.change li{display:grid;grid-template-columns:7.5em 1fr;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.change b{font-weight:700}
+.change span{color:var(--sub);font-size:15.5px;line-height:1.7}
+
+.tables{display:grid;gap:22px;grid-template-columns:1fr;margin-top:12px}
+@media(min-width:720px){.tables{grid-template-columns:1fr 1fr}}
+table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.5}
+caption{text-align:left;font-weight:700;padding-bottom:6px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:left}
+th{font-size:13.5px;color:var(--sub);font-weight:500}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+
+/* history */
+.hist{display:grid;gap:0;margin:24px 0 0;max-width:38em}
+.hist div{display:grid;grid-template-columns:6.5em 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.hist dt{font-family:var(--display);font-size:15px}
+.hist dd{margin:0}
+
+.note{border-left:4px solid var(--signal);background:var(--paper);padding:16px 18px;margin:26px 0;max-width:38em}
+.note p:last-child{margin:0}
+
+footer{max-width:960px;margin:70px auto 0;padding:26px 22px 44px;border-top:1px solid var(--line);color:var(--sub);font-size:14px;line-height:1.7}
+@media (prefers-reduced-motion:no-preference){.hero h1{animation:rise .8s ease-out both}@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}}
+
+/* usage picker */
+.modes{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 14px}
+.modes button{font:inherit;font-size:15px;font-weight:700;color:var(--ink);background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer;line-height:1.4}
+.modes button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.stage{display:grid;gap:22px;grid-template-columns:1fr;align-items:center;margin-bottom:8px}
+@media(min-width:720px){.stage{grid-template-columns:300px 1fr}}
+.stage svg{width:100%;max-width:300px;height:auto;margin:0 auto;display:block}
+.stage .car{fill:var(--paper);stroke:var(--ink);stroke-width:2.5}
+.stage .zone{fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:5 5}
+.stage .bed{fill:var(--blue-soft);stroke:var(--blue);stroke-width:2.5}
+.stage .gear{fill:var(--line);stroke:var(--sub);stroke-width:2}
+.stage .bag{fill:var(--paper);stroke:var(--ink);stroke-width:2}
+.stage text{font-family:var(--body);font-size:13px;fill:var(--ink);font-weight:700}
+.stage text.s{font-size:11px;fill:var(--sub);font-weight:500}
+.stage [data-m]{display:none}
+.stage[data-mode="fish"] [data-m~="fish"],.stage[data-mode="wide"] [data-m~="wide"],.stage[data-mode="stow"] [data-m~="stow"]{display:inline}
+.stage .desc b{display:block;font-size:19px;margin-bottom:4px}
+.stage .desc p{display:none;margin:0;font-size:16px;line-height:1.85}
+.stage[data-mode="fish"] .desc p[data-m="fish"],.stage[data-mode="wide"] .desc p[data-m="wide"],.stage[data-mode="stow"] .desc p[data-m="stow"]{display:block}
+.night{margin:26px 0 0;padding:18px 20px;background:var(--paper);border-left:4px solid var(--blue);max-width:38em}
+.night p{margin:0 0 .6em}.night p:last-child{margin:0}
+
+.hero img.slide{opacity:0;transition:opacity .6s ease}
+.hero img.slide.is-on{opacity:1}
+.hero img.slide[data-slide="wide"]{object-position:50% 58%}
+.hero-tabs{position:absolute;z-index:2;top:calc(env(safe-area-inset-top,0px) + 16px);left:0;right:0;max-width:960px;margin:0 auto;padding:0 22px;display:flex;gap:8px;flex-wrap:wrap}
+.hero-tabs button{font:inherit;font-size:14px;font-weight:700;color:#fff;background:rgba(8,16,20,.55);border:2px solid rgba(255,255,255,.55);border-radius:999px;padding:7px 14px;cursor:pointer;line-height:1.4;backdrop-filter:blur(4px)}
+.hero-tabs button[aria-pressed="true"]{background:#fff;color:#12252C;border-color:#fff}
+@media (prefers-reduced-motion:reduce){.hero img.slide{transition:none}}
+
+.scenes{display:grid;gap:14px;grid-template-columns:1fr 1fr;margin:28px 0 6px}
+@media(min-width:760px){.scenes{grid-template-columns:repeat(3,1fr)}}
+.scenes img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px}
+.scenes figure:nth-child(1) img{object-position:50% 62%}
+.scenes figure:nth-child(2) img{object-position:40% 55%}
+.scenes figure:nth-child(3) img{object-position:62% 62%}
+.scenes figure:nth-child(4) img{object-position:62% 72%}
+.scenes figure:nth-child(5) img{object-position:56% 55%}
+.scenes figure:nth-child(6) img{object-position:35% 55%}
+
+.mosaic{column-count:2;column-gap:12px;margin:14px 0 8px}
+@media(min-width:760px){.mosaic{column-count:3;column-gap:14px}}
+.mosaic figure{break-inside:avoid;margin:0 0 14px}
+.mosaic img{width:100%;height:auto;border-radius:4px}
+
+details.more{margin:6px 0 10px}
+details.more summary{list-style:none;display:inline-block;cursor:pointer;font-size:15px;font-weight:700;color:var(--blue);border:2px solid var(--blue);border-radius:999px;padding:8px 18px;line-height:1.4}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary .o{display:none}
+details.more[open] summary .c{display:none}
+details.more[open] summary .o{display:inline}
+details.more[open] summary{margin-bottom:16px}
+
+.plan{list-style:none;margin:26px 0 8px;padding:0;max-width:38em;border-top:2px solid var(--ink)}
+.plan li{display:grid;grid-template-columns:4.5em 1fr;gap:6px 14px;padding:16px 0;border-bottom:1px solid var(--line);align-items:start}
+.plan .day{font-family:var(--display);font-size:17px;line-height:1.5}
+.plan .what{line-height:1.8}
+.plan .stay{display:inline-block;margin-top:8px;font-size:14px;font-weight:700;border-radius:3px;padding:2px 12px}
+.plan .stay.car{color:var(--blue);background:var(--blue-soft)}
+.plan .stay.hotel{color:#fff;background:var(--sub)}
+.plan .stay.home{color:var(--sub);border:1px solid var(--line)}
+.merits h3{margin-top:26px}
+
+.kit{margin:22px 0 8px;max-width:38em;border-top:2px solid var(--ink)}
+.kit div{display:grid;grid-template-columns:9.5em 1fr;gap:6px 14px;padding:14px 0;border-bottom:1px solid var(--line)}
+@media(max-width:520px){.kit div{grid-template-columns:1fr}}
+.kit dt{font-weight:700;line-height:1.6}
+.kit dd{margin:0;line-height:1.8}
+
+.stage[data-mode="surf"] [data-m~="surf"],.stage[data-mode="bike"] [data-m~="bike"]{display:inline}
+.stage[data-mode="surf"] .desc p[data-m="surf"],.stage[data-mode="bike"] .desc p[data-m="bike"]{display:block}
+.others{margin-top:44px;padding-top:8px;border-top:1px solid var(--line)}
+.others h3{margin-top:22px}
+.assume{font-size:14.5px;color:var(--sub);margin-top:16px}
+
+.stage[data-mode="ss"] [data-m~="ss"],.stage[data-mode="lb"] [data-m~="lb"],.stage[data-mode="bk"] [data-m~="bk"]{display:inline}
+.stage[data-mode="ss"] .desc p[data-m="ss"],.stage[data-mode="lb"] .desc p[data-m="lb"],.stage[data-mode="bk"] .desc p[data-m="bk"]{display:block}
+.stage .ng{fill:none;stroke:var(--signal);stroke-width:2.5;stroke-dasharray:6 4}
+.stage text.r{fill:var(--signal)}
+.stage .dim{stroke:var(--sub);stroke-width:1.2;fill:none}
+.others .stage svg{max-width:300px}
+
+.cmp-wrap{overflow-x:auto;margin:22px 0 8px;border:1px solid var(--line);border-radius:4px;background:var(--paper);-webkit-overflow-scrolling:touch}
+.cmp{border-collapse:collapse;min-width:640px;width:100%;font-size:14.5px;line-height:1.65}
+.cmp th,.cmp td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.cmp thead th{font-size:14px;font-weight:700;color:var(--ink);border-bottom:2px solid var(--ink);white-space:nowrap}
+.cmp tbody th{font-weight:700;color:var(--sub);font-size:13.5px;white-space:nowrap}
+.cmp td.me{background:var(--blue-soft)}
+.cmp thead th.me{color:var(--blue)}
+.cmp-note{font-size:14px;color:var(--sub);max-width:38em;margin-top:10px}
+
+@media(max-width:640px){
+  .cmp-wrap{overflow:visible;border:0;background:none}
+  .cmp{min-width:0;font-size:15px}
+  .cmp thead{display:none}
+  .cmp,.cmp tbody,.cmp tr,.cmp th,.cmp td{display:block;width:100%}
+  .cmp tr{margin-bottom:18px;border:1px solid var(--line);border-radius:4px;background:var(--paper);overflow:hidden}
+  .cmp tbody th{white-space:normal;background:var(--ink);color:var(--bg);padding:8px 12px;font-size:14px}
+  .cmp td{border-bottom:1px solid var(--line);padding:9px 12px}
+  .cmp td:last-child{border-bottom:0}
+  .cmp td::before{content:attr(data-label);display:block;font-size:12.5px;font-weight:700;color:var(--sub);margin-bottom:2px}
+  .cmp td.me::before{color:var(--blue)}
+}
+
+.stage .seat{fill:var(--paper);stroke:var(--sub);stroke-width:2;stroke-dasharray:none}
+.stage .desc p.assume[data-m]{display:none;font-size:14.5px;color:var(--sub)}
+.stage[data-mode="stow"] .desc p.assume[data-m="stow"]{display:block}
+
+.stage[data-mode="big"] [data-m~="big"]{display:inline}
+.stage[data-mode="big"] .desc p[data-m="big"]{display:block}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img class="slide is-on" data-slide="fish" src="images/photo-01.jpg" alt="荷室の左側にマットを敷いたベッド、右側にクーラーボックスと釣り具を積んだランドクルーザー250の荷室">
+  <img class="slide" data-slide="wide" src="images/photo-02.jpg" alt="荷室の左右両側にマットを敷いたベッドを、リアゲートから見た写真">
+  <div class="hero-tabs" role="group" aria-label="キービジュアルの切り替え">
+    <button type="button" data-to="fish" aria-pressed="true">釣りの日(片側)</button>
+    <button type="button" data-to="wide" aria-pressed="false">広く寝る日(両側)</button>
+  </div>
+  <div class="hero-in">
+    <h1>ランクル250で釣り旅。<br>ベッドは組んだまま出発する。</h1>
+    <p>長距離は運転支援で走り、釣って、温泉に入って、ご飯を食べて、車で寝る。そのために自作したベッドキットと、荷室まわりの装備をまとめました。</p>
+  </div>
+</header>
+
+<main>
+
+<section id="flow">
+  <h2>釣り旅の一日</h2>
+  <p>宿は取りません。前乗りして現地で寝るので、釣果や天気に合わせて場所も時間も動かせます。</p>
+  <p>ランクル250は、納車から約2年で約4.8万km走りました。長距離の移動が、この使い方の前提になっています。</p>
+  <ol class="flow">
+    <li class="start"><b>自宅でベッドキットを組む</b><span>組み立ては約5分。組んだ状態のまま積んで出発します。</span></li>
+    <li><b>ランクル250で長距離を移動</b><span>運転支援を使って走ります。</span></li>
+    <li><b>現地で釣る</b><span>タックルとクーラーは荷室の右側。寝る側を汚しません。</span></li>
+    <li><b>温泉に入って、ご飯を食べる</b></li>
+    <li><b>車に戻ってそのまま寝る</b><span>現地での設営はゼロ。虫はウインドーネットで防ぎます。</span></li>
+  </ol>
+</section>
+
+<section id="scenes">
+  <h2>車中泊だと、こんな時間が過ごせる</h2>
+  <p>釣り場の近くに車を停めて、そのまま泊まれます。宿の時間に合わせて動く必要がなく、港の景色の中で一日を過ごせます。</p>
+  <div class="scenes"><figure><img src="images/photo-03.jpg" alt="山を背にした漁港の駐車場に停めたランドクルーザー250" loading="lazy"><figcaption>山を背にした漁港の駐車場</figcaption></figure><figure><img src="images/photo-04.jpg" alt="夕焼けの漁港に停めたランドクルーザー250の後ろ姿" loading="lazy"><figcaption>夕焼けの漁港</figcaption></figure><figure><img src="images/photo-05.jpg" alt="車の横に竿とリールを立てかけた港の風景" loading="lazy"><figcaption>竿を立てかけて、港で釣る</figcaption></figure></div>
+  <details class="more"><summary><span class="c">もっと見る(+3枚)</span><span class="o">閉じる</span></summary><div class="scenes"><figure><img src="images/photo-06.jpg" alt="青空の下、漁船が並ぶ港に停めたランドクルーザー250" loading="lazy"><figcaption>漁船が並ぶ、青空の港</figcaption></figure><figure><img src="images/photo-07.jpg" alt="曇り空の漁港の岸壁に停めたランドクルーザー250" loading="lazy"><figcaption>漁港の岸壁にて</figcaption></figure><figure><img src="images/photo-08.jpg" alt="青い海と黄色と黒の係船柱が見える港" loading="lazy"><figcaption>海を望む港</figcaption></figure></div></details>
+</section>
+
+<section id="principle">
+  <h2>いつでも普通の車に戻せること</h2>
+  <p>自作するときに一番大事にしたのは、いつでも普通の状態に戻せることです。個人的には、既製品のベッドキットは片付けられないものが多いと感じていました。普段は普通の車として使えることを大事にしました。</p>
+  <p>このベッドキットは、差し込み式のパイプを分解してベルクロで束ね、マットと一緒にバッグに入れてまとめられます。使わない日は、車に積まずに家に置いておけるので、荷室はそのまま普通に使えます。左右に分かれているので、片側だけ使うこともできます。</p>
+  <figure class="wide"><img src="images/photo-09.jpg" alt="荷室の床に、ベッドキットを入れた黒い2つのバッグが並んでいる写真" loading="lazy"><figcaption>ベッドキットは、2つのバッグにまとまります。使わない日は、家に置いておけます。</figcaption></figure>
+</section>
+
+<section id="layout">
+  <h2>左右に分けて、片側はベッド、片側は荷物</h2>
+  <p>左右に分けてあるので、釣りの日にクーラーとタックルボックスを片側に置いても、反対側はベッドかシートとして使えます。</p>
+  <p>ベッドキットは左右2つに分かれています。釣りの日は片側だけベッドにして、反対側にクーラーボックス、バスケット、タックルを置きます。</p>
+  <div class="pair">
+    <figure><img src="images/photo-10.jpg" alt="黒いマットのベッドの横にクーラーボックスを置いた荷室" loading="lazy"><figcaption>ベッドの横にクーラー。通路側にバスケットを置いています。</figcaption></figure>
+    <figure><img src="images/photo-11.jpg" alt="ベッドキットを黒いバッグにまとめて、クーラーと一緒に積んだ荷室" loading="lazy"><figcaption>ベッドキットをバッグにまとめて、クーラーと一緒に積んだ状態。釣りの日はクーラーとタックルボックスを置くので、2列目は片側を倒したまま。もう片側のシートは戻して使えます。</figcaption></figure>
+  </div>
+  <p>幅は2列目シートの分割サイズに合わせました。倒したシート面にそのまま収まります。寝返りが多い人は、反対側のフレームも展開すれば広く使えます。筆者はあまり寝返りをしないので、片側だけで困っていません。</p>
+</section>
+
+
+<section id="usage">
+  <h2>自分の車と釣りに置き換えてみる</h2>
+  <p>2列目シートと荷物スペースを合わせた、荷室を真上から見た図です。前の2つが2列目シート、後ろの2つが荷物スペースです。使い方を選ぶと、ベッドと荷物の置き場所が切り替わります。</p>
+  <div class="modes" role="group" aria-label="使い方の切り替え" data-for="stage">
+    <button type="button" data-mode="fish" aria-pressed="true">釣りの日(30L)</button>
+      <button type="button" data-mode="big" aria-pressed="false">釣りの日(80L・大物)</button>
+    <button type="button" data-mode="wide" aria-pressed="false">広く寝る日</button>
+    <button type="button" data-mode="stow" aria-pressed="false">ベッドを使わない日</button>
+  </div>
+  <div class="stage" id="stage" data-mode="fish">
+    <svg viewBox="0 0 300 480" role="img" aria-label="2列目シートと荷物スペースを合わせた荷室を、実寸に近い縮尺で真上から見た配置図">
+      <text class="s" x="150" y="20" text-anchor="middle">前(運転席側)</text>
+      <text class="s" x="150" y="32" text-anchor="middle" style="display:none"></text>
+      <rect class="car" x="37" y="40" width="226" height="400" rx="8"/>
+      <line class="zone" x1="150" y1="44" x2="150" y2="436"/>
+      <line class="zone" x1="41" y1="220" x2="259" y2="220"/>
+      <text class="s" x="22" y="130" transform="rotate(-90 22 130)" text-anchor="middle">2列目シート</text>
+      <text class="s" x="22" y="330" transform="rotate(-90 22 330)" text-anchor="middle">荷物スペース</text>
+      <text class="s" x="150" y="462" text-anchor="middle">後ろ(リアゲート)</text>
+
+      <!-- ベッドを使わない日 -->
+      <g data-m="stow">
+        <rect class="seat" x="45" y="48" width="98" height="164" rx="6"/>
+        <text x="94" y="134" text-anchor="middle">座席</text>
+        <rect class="seat" x="157" y="48" width="98" height="164" rx="6"/>
+        <text x="206" y="134" text-anchor="middle">座席</text>
+        <rect class="gear" x="48" y="232" width="93" height="67" rx="4"/>
+        <text x="94" y="261" text-anchor="middle">タックル</text>
+        <text class="s" x="94" y="278" text-anchor="middle">ボックス</text>
+      </g>
+
+      <!-- 釣りの日・広く寝る日: 左はベッド -->
+      <g data-m="fish big wide">
+        <rect class="bed" x="37" y="44" width="113" height="360" rx="5"/>
+        <text x="94" y="214" text-anchor="middle">ベッド</text>
+        <text class="s" x="94" y="232" text-anchor="middle">幅57cm</text>
+      </g>
+      <g data-m="fish big">
+        <rect class="gear" x="160" y="52" width="93" height="67" rx="4"/>
+        <text x="206" y="81" text-anchor="middle">タックル</text>
+        <text class="s" x="206" y="98" text-anchor="middle">ボックス</text>
+      </g>
+      <g data-m="wide">
+        <rect class="bed" x="150" y="44" width="113" height="360" rx="5"/>
+        <text x="206" y="214" text-anchor="middle">ベッド</text>
+        <text class="s" x="206" y="232" text-anchor="middle">反対側も展開</text>
+      </g>
+
+      <!-- クーラーは3つのモードで共通 -->
+      <g data-m="stow fish">
+        <rect class="gear" x="175" y="232" width="63" height="138" rx="4"/>
+        <text x="206" y="298" text-anchor="middle">クーラー</text>
+        <text class="s" x="206" y="316" text-anchor="middle">約30L</text>
+      </g>
+    
+      <g data-m="big">
+        <rect class="gear" x="165" y="228" width="83" height="205" rx="4"/>
+        <text x="206" y="322" text-anchor="middle">クーラー</text>
+        <text class="s" x="206" y="340" text-anchor="middle">80L</text>
+      </g>
+    </svg>
+    <div class="desc">
+      <p data-m="fish"><b>釣りの日(30L)</b>左側をベッド、右側の後ろにクーラー、前にタックルボックス。釣りのあと濡れた道具を置いても、寝る側は汚れません。温泉と食事から戻ったら、そのまま横になれます。</p><p data-m="big"><b>釣りの日(80L・大物)</b>大物釣り用の80Lのクーラーは、荷物スペースの片側にほぼいっぱいで収まります。ベッドは左側のままで、タックルボックスは前に置きます。長さの余裕は、約7cmです。</p>
+      <p data-m="wide"><b>広く寝る日</b>寝返りを打ちたいときは、反対側のフレームも展開します。左右に分けてあるので、寝る幅を日によって選べます。</p>
+      <p data-m="stow"><b>ベッドを使わない日</b>ベッドキットは、家に置いていきます。前の2つは2列目シートとして使い、荷物スペースにタックルボックスとクーラーを置きます。クーラーは約30Lで、荷物スペースの片側に収まります。</p>
+        <p class="assume" style="display:block;margin-top:12px">図は、荷室の幅約113cm、長さ約200cmに合わせた縮尺です。クーラーは30Lが31.5×69cm、80Lが41.5×102.5cm、タックルボックスは46.5×33.3cmの大きさで描いています。荷物スペースの長さは約110cmが目安です。</p>
+    </div>
+  </div>
+
+  <div class="night">
+    <p><b>夜の流れ</b></p>
+    <p>釣りのあとは温泉に入って、ご飯を食べて、車に戻ります。ベッドは自宅で組んだまま積んであるので、ここで設営することはありません。虫が気になる時期は、窓にウインドーネットを付けて寝ます。</p>
+  </div>
+</section>
+
+<section id="bedkit">
+  <h2>ベッドキット</h2>
+  <dl class="facts">
+    <div><dt>つくった時期</dt><dd>2024年11月</dd></div>
+    <div><dt>組み立て</dt><dd>約5分</dd></div>
+    <div><dt>費用</dt><dd>約4万円</dd></div>
+    <div><dt>構成</dt><dd>左右2分割</dd></div>
+  </dl>
+  <p class="sub" style="font-size:14px">費用は記憶ベースのおおよその金額です。</p>
+
+  <div class="trio">
+    <figure><img src="images/photo-12.jpg" alt="黒いマットを載せたベッドを荷室後方から見た写真" loading="lazy"><figcaption>マットを載せた状態</figcaption></figure>
+    <figure><img src="images/photo-13.jpg" alt="パイプとジョイントで組んだフレームだけの状態" loading="lazy"><figcaption>フレームだけの状態</figcaption></figure>
+    <figure><img src="images/photo-14.jpg" alt="分解したパイプをベルクロで束ねた状態" loading="lazy"><figcaption>分解して束ねた状態</figcaption></figure>
+  </div>
+
+  <p>パイプとジョイントを差し込んで組む、脚付きのフレームです。分解するとパイプをベルクロで束ねられるので、保管もかさばりません。</p>
+
+  <h3>初版から、1か月で作り直した</h3>
+  <p>納車の翌月に初版を作り、実車で試しながら、12月に修正版を作りました。</p>
+  <span class="tag">11月版(左側)</span>
+  <div class="scroll"><img src="images/photo-15.jpg" alt="11月版の設計図。足元側の幅40cm、頭側31cm" loading="lazy"></div>
+  <p class="hint">横にスクロールできます。</p>
+  <br>
+  <span class="tag">12月版(右側)</span>
+  <div class="scroll"><img src="images/photo-16.jpg" alt="12月版の設計図。足元側の幅57cm、頭側45cm、片側47cmの段差対応と連結補強つき" loading="lazy"></div>
+  <p class="hint">横にスクロールできます。</p>
+
+  <ul class="change">
+    <li><b>幅を広げた</b><span>足元側 40cm → 57cm、頭側 31cm → 45cm。</span></li>
+    <li><b>段差に合わせた</b><span>後席中央の段差に乗せるため、片側の寸法を47cmにしました。</span></li>
+    <li><b>左右を連結した</b><span>左右のフレームを23cmのパイプとジョイントでつなぎ、強度を確保しました。</span></li>
+  </ul>
+
+  <h3>部品表(12月版・右側フレーム1台分)</h3>
+  <div class="tables">
+    <table>
+      <caption>パイプ</caption>
+      <thead><tr><th>長さ</th><th class="n">本数</th></tr></thead>
+      <tbody>
+        <tr><td>90cm</td><td class="n">4</td></tr>
+        <tr><td>57cm</td><td class="n">4</td></tr>
+        <tr><td>47cm</td><td class="n">1</td></tr>
+        <tr><td>45cm</td><td class="n">3</td></tr>
+        <tr><td>25cm</td><td class="n">2</td></tr>
+        <tr><td>23cm</td><td class="n">1</td></tr>
+        <tr><td>22cm</td><td class="n">2</td></tr>
+        <tr><td>17cm</td><td class="n">2</td></tr>
+      </tbody>
+    </table>
+    <table>
+      <caption>ジョイント</caption>
+      <thead><tr><th>品番</th><th class="n">数量</th></tr></thead>
+      <tbody>
+        <tr><td>J-4</td><td class="n">5</td></tr>
+        <tr><td>J-59A</td><td class="n">4</td></tr>
+        <tr><td>J-123</td><td class="n">2</td></tr>
+        <tr><td>J-12C</td><td class="n">2</td></tr>
+        <tr><td>J-157A(脚)</td><td class="n">2</td></tr>
+        <tr><td>J-7C</td><td class="n">1</td></tr>
+        <tr><td>J-12A</td><td class="n">1</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="compare">
+  <h2>純正・既製品と比べると</h2>
+  <p>ランクル250には、トヨタの販売店で買える公式のベッドキットがあります。ほかにも、専門メーカーの製品が出ています。自作との違いを、公開されている情報で並べました。</p>
+  <div class="cmp-wrap" role="region" aria-label="純正・既製品・自作の比較表" tabindex="0">
+    <table class="cmp">
+      <thead><tr><th></th><th>純正<br><span class="sub" style="font-weight:400">トイファクトリー製・トヨタ販売店</span></th><th>既製品の例<br><span class="sub" style="font-weight:400">オグショー ESベッドシステム</span></th><th class="me">自作<br><span class="sub" style="font-weight:400">このページのキット</span></th></tr></thead>
+      <tbody>
+        <tr><th>価格</th><td data-label="純正">約30.6万円(発売時、工賃別)</td><td data-label="既製品の例">約30万円前後(発表時)</td><td class="me" data-label="自作">約4万円</td></tr>
+        <tr><th>構成</th><td data-label="純正">マット4枚(厚さ50mm)とフレーム。マットは約24kg、フレームは約3.5kg</td><td data-label="既製品の例">専用設計のベッドシステム</td><td class="me" data-label="自作">パイプとジョイントのフレーム、マット。左右2分割</td></tr>
+        <tr><th>就寝スペース</th><td data-label="純正">長さ約176cm、幅約110〜140cm</td><td data-label="既製品の例">長さ約186cm、幅約130cm</td><td class="me" data-label="自作">片側の幅57cm、長さ約180cm。両側で約114cm</td></tr>
+        <tr><th>ベッド下の高さ</th><td data-label="純正">約12〜20cm</td><td data-label="既製品の例">約17cm</td><td class="me" data-label="自作">約17〜25cm(脚の長さ)</td></tr>
+        <tr><th>片側だけ使う</th><td data-label="純正">できる。2列目の片方を起こして、反対側だけマットを敷く</td><td data-label="既製品の例">公開情報では確認できず</td><td class="me" data-label="自作">できる。左右が独立している</td></tr>
+        <tr><th>走行中</th><td data-label="純正">公開情報では確認できず</td><td data-label="既製品の例">自動車雑誌は、プロのキットの利点としてガタつきのなさを挙げている</td><td class="me" data-label="自作">荒れた路面では、パイプが数か所外れたことがある</td></tr>
+        <tr><th>手を入れられるか</th><td data-label="純正">専用設計で、寸法はぴったり</td><td data-label="既製品の例">専用設計で、寸法はぴったり</td><td class="me" data-label="自作">幅、段差、脚の高さを自分で直せる。実際に1か月で作り直した</td></tr>
+        <tr><th>向いている人</th><td data-label="純正">車に合わせた仕上がりを重視する人</td><td data-label="既製品の例">広く、しっかり寝たい人</td><td class="me" data-label="自作">費用を抑えて、使い方に合わせて直したい人</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cmp-note">価格は発売時や発表時の情報で、変わっている場合があります。購入するときは、各社の最新情報を確認してください。純正の寸法と構成は、トヨタ販売店限定モデルの発表内容によります。</p>
+
+  <h3>費用は、およそ7〜8分の1</h3>
+  <p>同じように就寝できるキットが、約30万円のところ、約4万円で作れました。浮いた費用で、釣り旅の宿代やガソリン代に回せます。</p>
+  <h3>片側だけ使う使い方は、自作でもできる</h3>
+  <p>片側をベッド、反対側を荷物置き場にする使い方は、純正でも紹介されています。自作でも、同じ使い方ができます。左右が独立しているので、釣りの日はクーラーとタックルボックスを置いて、反対側だけベッドにできます。</p>
+  <h3>差が出るのは、安定感と仕上がり</h3>
+  <p>プロの製品は、ガタつきのなさと、車内の寸法にぴったり合わせた作りが強みです。自作は、荒れた路面でパイプが外れることがありました。そのかわり、自分の車と使い方に合わせて、いつでも直せます。</p>
+</section>
+
+<section id="gear">
+  <h2>荷室まわりの装備</h2>
+  <h3>天井のバーに竿を吊る</h3>
+  <p>荷室の天井にバーを渡して、竿を吊っています。ベッドの上の空間を使えるので、床面積は減りません。</p>
+  <h3>クーラーの下にトレイ</h3>
+  <p>水や汚れが荷室に広がらないように、クーラーボックスはトレイの上に置いています。</p>
+  <h3>ウインドーネットで虫を防ぐ</h3>
+  <p>蚊や虫の対策に、窓に被せる網戸タイプのウインドーネット(4枚セット)を使っています。窓を開けて換気できて、虫が入ってきたことはありません。</p>
+</section>
+
+<section id="kit">
+  <h2>車中泊の持ち物は、これだけ</h2>
+  <p>車中泊というと、車の中で料理をするイメージを持つ人も多いと思います。ソロキャンプもするので、そういう使い方も考えました。でも、旅先ではその土地の郷土料理を食べて、車では寝るだけ。そこに振り切りました。</p>
+  <p>ソロキャンプは、設営も、準備も、料理も楽しむものです。ただ、それだけで相当の時間がかかります。車中泊は、いろいろ楽しんだあと、ちゃんと寝るだけ。使い方を分けています。</p>
+  <div class="mosaic"><figure><img src="images/photo-17.jpg" alt="草地に張った黄色いテントと、椅子とテーブル" loading="lazy"><figcaption>ソロキャンプのテント</figcaption></figure><figure><img src="images/photo-18.jpg" alt="夜の草地で燃える小さな焚き火台" loading="lazy"><figcaption>ソロキャンプの夜</figcaption></figure><figure><img src="images/photo-19.jpg" alt="テーブルに並ぶ、魚の刺身とごはん" loading="lazy"><figcaption>ソロキャンプの夕食</figcaption></figure></div>
+  <p style="margin-top:18px">料理の道具がいらないので、荷物は少なく済みます。最低限そろえているのは、次の4つです。</p>
+  <dl class="kit">
+    <div><dt>ポータブル電源<br><span class="sub" style="font-weight:400;font-size:14.5px">Jackery Explorer 100 Plus</span></dt><dd>Apple Watchとスマホの充電に使います。スマホとApple Watchを合わせて、3〜4回分くらいのイメージです。電源本体は、走行中に充電しています。</dd></div>
+    <div><dt>シュラフ</dt><dd>冬用と、春秋用の2種類。季節に合わせて使い分けます。冬用は、2月の仙台でも問題なく寝られました。</dd></div>
+    <div><dt>バスタオルとタオル</dt><dd>温泉に入るときに使います。</dd></div>
+    <div><dt>インフレータブルの枕<br><span class="sub" style="font-weight:400;font-size:14.5px">スノーピーク</span></dt><dd>空気を入れてふくらませる枕です。高い枕が苦手なので、空気は4分の1くらいにして寝ています。好みは人によるので、空気の量で調整できるのが便利です。</dd></div>
+  </dl>
+  <p style="margin-top:18px">ベッドキットがあって、この4つがあれば、旅で不自由はありません。</p>
+</section>
+
+<section id="plan">
+  <h2>車中泊とホテルを組み合わせる</h2>
+  <p>毎晩車で寝る必要はありません。車中泊の夜とホテルの夜を混ぜると、旅の組み立ての幅が広がります。一例として、2泊3日ならこんな形です。</p>
+  <ol class="plan">
+    <li><span class="day">1日目</span><span class="what">現地へ移動して、釣りや寄り道を楽しむ。<br><span class="stay car">夜は車中泊</span></span></li>
+    <li><span class="day">2日目</span><span class="what">気になった場所へ足をのばす。<br><span class="stay hotel">夜はホテル</span></span></li>
+    <li><span class="day">3日目</span><span class="what">ホテルでしっかり休んでから、帰路につく。<br><span class="stay home">帰宅</span></span></li>
+  </ol>
+  <div class="merits">
+    <h3>旅費を抑えられる</h3>
+    <p>車中泊の夜は、宿代がかかりません。旅の全部の夜をホテルにするより、費用を減らせます。</p>
+    <h3>最終日の前に、ちゃんと休める</h3>
+    <p>疲れがたまる前に、ホテルで体を休める夜をはさめます。帰りの運転に向けて、最後の夜は無理をしない選び方ができます。</p>
+    <h3>その日の気分で決められる</h3>
+    <p>天気や疲れ具合を見て、今夜は車、今夜はホテル、と選べます。ベッドキットを積んでいれば、どちらにも切り替えられます。</p>
+  </div>
+</section>
+
+<section id="honest">
+  <h2>正直に書いておくこと</h2>
+  <div class="note">
+    <p>能登半島地震の後、輪島周辺のうねった道路を走り続けたとき、パイプが数か所外れました。現地ではめ直して、そのまま使えました。</p>
+  </div>
+  <p>普通の道路を走る分には問題ありません。段差やうねりが続く道を何度も走ると、ずれることがあります。外れる場所は決まっておらず、再現性はまだ確認できていません。</p>
+  <p>差し込み式なので、ずれても壊れずに外れるだけです。ゼロから組み立てるより、はめ直すほうがずっと楽です。</p>
+</section>
+
+<section id="trips">
+  <h2>車中泊だと、行ける場所が広がる</h2>
+  <p>ここに載せた場所は、すべてランクル250で行きました。宿を取らないので、気になった場所に寄りながら進めます。泊まりは車の中。行き先の選び方が、宿の場所に縛られません。</p>
+  <h3>名所に寄る</h3>
+  <div class="mosaic"><figure><img src="images/photo-20.jpg" alt="夜にライトアップされた原爆ドーム" loading="lazy"><figcaption>広島の原爆ドーム</figcaption></figure><figure><img src="images/photo-21.jpg" alt="夕方の海に立つ赤い大鳥居" loading="lazy"><figcaption>宮島の大鳥居</figcaption></figure><figure><img src="images/photo-22.jpg" alt="大きなしめ縄が下がる神楽殿" loading="lazy"><figcaption>出雲大社</figcaption></figure><figure><img src="images/photo-23.jpg" alt="水木しげるロードにある鬼太郎の像" loading="lazy"><figcaption>水木しげるロードの鬼太郎像</figcaption></figure><figure><img src="images/photo-24.jpg" alt="鬼太郎の絵が描かれた交番の看板" loading="lazy"><figcaption>鬼太郎交番</figcaption></figure><figure><img src="images/photo-25.jpg" alt="赤い欄干のはりまや橋" loading="lazy"><figcaption>高知のはりまや橋</figcaption></figure></div>
+  <details class="more"><summary><span class="c">もっと見る(+8枚)</span><span class="o">閉じる</span></summary><div class="mosaic"><figure><img src="images/photo-26.jpg" alt="海にかかる大きな吊り橋を上から見た景色" loading="lazy"><figcaption>海にかかる大きな吊り橋</figcaption></figure><figure><img src="images/photo-27.jpg" alt="青空にそびえる通天閣" loading="lazy"><figcaption>通天閣</figcaption></figure><figure><img src="images/photo-28.jpg" alt="青空の下の恐山の山門" loading="lazy"><figcaption>恐山の山門</figcaption></figure><figure><img src="images/photo-29.jpg" alt="放水する黒部ダム" loading="lazy"><figcaption>黒部ダムの放水</figcaption></figure><figure><img src="images/photo-30.jpg" alt="花で飾られた大きな文字のオブジェと売店" loading="lazy"><figcaption>埼玉・桶川の「べに花の郷」</figcaption></figure><figure><img src="images/photo-31.jpg" alt="屋根の下に野菜や特産品が並ぶ市場" loading="lazy"><figcaption>地元の品が並ぶ市場</figcaption></figure><figure><img src="images/photo-32.jpg" alt="夜のネオンが輝く川沿いの繁華街と観覧車" loading="lazy"><figcaption>大阪・道頓堀</figcaption></figure><figure><img src="images/photo-33.jpg" alt="木の格子が続く古い町家の通り" loading="lazy"><figcaption>格子の町家が並ぶ通り</figcaption></figure></div></details>
+  <h3>温泉に入る</h3>
+  <div class="mosaic"><figure><img src="images/photo-34.jpg" alt="柳が揺れる温泉街の通り。看板に下呂温泉と書かれている" loading="lazy"><figcaption>下呂温泉</figcaption></figure><figure><img src="images/photo-35.jpg" alt="窓の外に緑が見える木の湯船" loading="lazy"><figcaption>窓の外に緑が見える木の湯船</figcaption></figure></div>
+  <h3>その土地のものを食べる</h3>
+  <div class="mosaic"><figure><img src="images/photo-36.jpg" alt="鯛めし" loading="lazy"><figcaption>鯛めし</figcaption></figure><figure><img src="images/photo-37.jpg" alt="カツオのたたきがのった丼" loading="lazy"><figcaption>カツオのたたき丼</figcaption></figure><figure><img src="images/photo-38.jpg" alt="卵をのせたラーメン" loading="lazy"><figcaption>卵をのせたラーメン</figcaption></figure><figure><img src="images/photo-39.jpg" alt="うどんと天ぷら" loading="lazy"><figcaption>うどん</figcaption></figure></div>
+  <details class="more"><summary><span class="c">もっと見る(+6枚)</span><span class="o">閉じる</span></summary><div class="mosaic"><figure><img src="images/photo-40.jpg" alt="手に持った湯の花まんじゅうと店の看板" loading="lazy"><figcaption>湯の花まんじゅう</figcaption></figure><figure><img src="images/photo-41.jpg" alt="カニとエビの握りと盛りつけ" loading="lazy"><figcaption>カニとエビの握り</figcaption></figure><figure><img src="images/photo-42.jpg" alt="土鍋で煮えている鍋料理" loading="lazy"><figcaption>土鍋の鍋料理</figcaption></figure><figure><img src="images/photo-43.jpg" alt="串に刺したおでん" loading="lazy"><figcaption>串に刺したおでん</figcaption></figure><figure><img src="images/photo-44.jpg" alt="あんこをはさんだトースト" loading="lazy"><figcaption>あんこトースト</figcaption></figure><figure><img src="images/photo-45.jpg" alt="蛇口からポンジュースが出る設置物" loading="lazy"><figcaption>蛇口からポンジュース</figcaption></figure></div></details>
+  <h3>自然の中へ</h3>
+  <div class="mosaic"><figure><img src="images/photo-46.jpg" alt="青空の下、岩山と緑の斜面が広がる山の景色" loading="lazy"><figcaption>山の景色</figcaption></figure><figure><img src="images/photo-47.jpg" alt="緑色の川が流れる渓谷" loading="lazy"><figcaption>緑色の川が流れる渓谷</figcaption></figure><figure><img src="images/photo-48.jpg" alt="白いあじさいの花と緑の景色" loading="lazy"><figcaption>あじさい</figcaption></figure><figure><img src="images/photo-49.jpg" alt="澄んだ湖にかかる赤い太鼓橋" loading="lazy"><figcaption>湖にかかる赤い橋</figcaption></figure></div>
+  <details class="more"><summary><span class="c">もっと見る(+6枚)</span><span class="o">閉じる</span></summary><div class="mosaic"><figure><img src="images/photo-50.jpg" alt="太陽が反射する海と渦の流れ" loading="lazy"><figcaption>渦を巻く海</figcaption></figure><figure><img src="images/photo-51.jpg" alt="紅葉の中の赤い橋" loading="lazy"><figcaption>紅葉と赤い橋</figcaption></figure><figure><img src="images/photo-52.jpg" alt="夜にライトアップされた庭園" loading="lazy"><figcaption>夜の庭園のライトアップ</figcaption></figure><figure><img src="images/photo-53.jpg" alt="青空の下に広がるコスモス畑" loading="lazy"><figcaption>コスモス畑</figcaption></figure><figure><img src="images/photo-54.jpg" alt="松に囲まれた池のある庭園" loading="lazy"><figcaption>池のある庭園</figcaption></figure><figure><img src="images/photo-55.jpg" alt="白州蒸溜所と南アルプスの天然水の看板" loading="lazy"><figcaption>白州の蒸溜所</figcaption></figure></div></details>
+</section>
+
+<section id="history">
+  <h2>これまでの流れ</h2>
+  <dl class="hist">
+    <div><dt>2024年4月</dt><dd>ランクル250のオーダー受付</dd></div>
+    <div><dt>2024年10月</dt><dd>納車</dd></div>
+    <div><dt>2024年11月</dt><dd>ベッドキットの初版を自作</dd></div>
+    <div><dt>2024年12月</dt><dd>幅の拡大、段差対応、連結補強を入れた修正版を設計図にして公開</dd></div>
+    <div><dt>現在</dt><dd>納車から約2年で、走行距離は約4.8万km。釣り旅の車中泊で使い続けています</dd></div>
+  </dl>
+</section>
+
+</main>
+
+<footer>
+  ランクル250の自作ベッドキットと車中泊装備の紹介です。寸法や部品は筆者の車での実例なので、ほかの車種ではまず2列目シートの分割幅を測ってから設計してください。
+</footer>
+
+<script>
+(function(){
+  var hero=document.querySelector('.hero');
+  var slides=hero.querySelectorAll('.slide');
+  var btns=hero.querySelectorAll('.hero-tabs button');
+  var order=['fish','wide'];
+  function show(k){
+    slides.forEach(function(s){s.classList.toggle('is-on',s.getAttribute('data-slide')===k)});
+    btns.forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-to')===k?'true':'false')});
+  }
+  function cur(){return hero.querySelector('.slide.is-on').getAttribute('data-slide')}
+  function step(){show(order[(order.indexOf(cur())+1)%order.length])}
+  btns.forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-to'))})});
+  var x0=null;
+  hero.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  hero.addEventListener('touchend',function(e){
+    if(x0===null)return; var dx=e.changedTouches[0].clientX-x0; x0=null;
+    if(Math.abs(dx)>50)step();
+  });
+})();
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.modes[data-for]').forEach(function(g){
+    var st=document.getElementById(g.getAttribute('data-for'));
+    var bs=g.querySelectorAll('button');
+    bs.forEach(function(b){b.addEventListener('click',function(){
+      st.setAttribute('data-mode',b.getAttribute('data-mode'));
+      bs.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    })});
+  });
+})();
+</script>
+</body>
+</html>
