@@ -532,7 +532,8 @@ a.btn:hover{filter:brightness(1.08)}
 </main>
 
 <footer>
-  ランクル250の自作ベッドキットと車中泊装備の紹介です。寸法や部品は筆者の車での実例なので、ほかの車種ではまず2列目シートの分割幅を測ってから設計してください。
+  ランクル250の自作ベッドキットと車中泊装備の紹介です。寸法や部品は筆者の車での実例なので、ほかの車種ではまず2列目シートの分割幅を測ってから設計してください。<br>
+  アクセス状況の把握のため、Googleアナリティクスを使用しています(個人を特定しない形で集計しています)。
 </footer>
 
 <script>
@@ -583,6 +584,20 @@ a.btn:hover{filter:brightness(1.08)}
   new IntersectionObserver(function(e){heroOut=!e[0].isIntersecting;upd()}).observe(hero);
   new IntersectionObserver(function(e){contactIn=e[0].isIntersecting;upd()}).observe(c);
 })();
+</script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-56JCQDKSMD"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date());
+gtag('config','G-56JCQDKSMD');
+document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('a[href*="docs.google.com/forms"]');
+  if(!a)return;
+  gtag('event','ask_click',{button_location:a.id==='floatAsk'?'floating':'contact_section'});
+});
 </script>
 </body>
 </html>
