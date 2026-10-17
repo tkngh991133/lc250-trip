@@ -233,6 +233,14 @@ a.btn:hover{filter:brightness(1.08)}
 .float-ask.is-show{opacity:1;pointer-events:auto;transform:none}
 @media (prefers-reduced-motion:no-preference){.float-ask{transition:opacity .25s ease,transform .25s ease}}
 
+
+/* faq */
+.faq-item{border:1px solid var(--line);border-radius:4px;background:var(--paper);padding:16px 16px 14px;margin:14px 0}
+.faq-item h3{display:flex;gap:12px;align-items:flex-start;margin:0 0 12px;font-size:16.5px;line-height:1.6;color:var(--ink)}
+.faq-item .a{display:flex;gap:12px;align-items:flex-start;padding-top:12px;border-top:1px dashed var(--line)}
+.faq-item .a p{margin:0;flex:1;min-width:0}
+.faq-item .mk{flex:none;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-family:var(--body);font-size:14px;font-weight:700;line-height:1;margin-top:1px;background:var(--blue);color:var(--bg)}
+.faq-item .a .mk{background:var(--signal);color:#fff}
 /* top nav */
 .topnav{position:fixed;top:0;left:0;right:0;z-index:60;background:var(--paper);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px);transform:translateY(-100%);visibility:hidden;opacity:0}
 .topnav.is-show{transform:none;visibility:visible;opacity:1}
@@ -417,6 +425,7 @@ section,#contact{scroll-margin-top:52px}
 
 <section id="design">
   <h2>ベッドキットの設計図と部品表</h2>
+  <p>このベッドキットは、矢崎化工のイレクターパイプとジョイントで作っています。設計図の部品は、公式通販サイトの<a href="https://yzk-shop.net/" target="_blank" rel="noopener noreferrer">ヤザキショッピング</a>で買えます。当時は、設計図のとおりにパイプをカットしてもらえたので、自分で切る手間はありませんでした。現在の対応は、お店で確認してください。</p>
   <h3>初版から、1か月で作り直した</h3>
   <p>納車の翌月に初版を作り、実車で試しながら、12月に修正版を作りました。</p>
   <span class="tag">11月版(左側)</span>
@@ -566,9 +575,52 @@ section,#contact{scroll-margin-top:52px}
   </dl>
 </section>
 
+<section id="faq">
+  <h2>ランクル250ベッドキットのよくある質問</h2>
+  <div class="faq-item">
+    <h3><span class="mk" aria-hidden="true">Q</span><span>組み立てにどのくらいかかりますか</span></h3>
+    <div class="a"><span class="mk" aria-hidden="true">A</span><p>約5分です。差し込み式のパイプで組むので、工具は使いません。自宅で組んだ状態のまま積んで出発します。</p></div>
+  </div>
+  <div class="faq-item">
+    <h3><span class="mk" aria-hidden="true">Q</span><span>費用はいくらでしたか</span></h3>
+    <div class="a"><span class="mk" aria-hidden="true">A</span><p>約5万円です。記憶ベースのおおよその金額です。A社の車種専用キットは、発売時の価格で約30万円(工賃別)でした。くわしくは<a href="#compare">市販のベッドキットとの比較</a>に載せています。</p></div>
+  </div>
+  <div class="faq-item">
+    <h3><span class="mk" aria-hidden="true">Q</span><span>寝る広さは足りますか</span></h3>
+    <div class="a"><span class="mk" aria-hidden="true">A</span><p>片側の幅は57cm、長さは約180cmで、両側を使うと幅は約114cmです。筆者はあまり寝返りをしないので、片側だけで困っていません。寝返りが多い人は、反対側のフレームも展開すると、広く使えます。</p></div>
+  </div>
+  <div class="faq-item">
+    <h3><span class="mk" aria-hidden="true">Q</span><span>片側だけ使えますか</span></h3>
+    <div class="a"><span class="mk" aria-hidden="true">A</span><p>使えます。左右が独立しているので、釣りの日はクーラーとタックルボックスを片側に置いて、反対側だけベッドにしています。</p></div>
+  </div>
+  <div class="faq-item">
+    <h3><span class="mk" aria-hidden="true">Q</span><span>普段は普通の車として使えますか</span></h3>
+    <div class="a"><span class="mk" aria-hidden="true">A</span><p>使えます。パイプを分解してベルクロで束ね、マットと一緒に、2つのバッグにまとめられます。使わない日は家に置いておくので、荷室はそのまま使えます。</p></div>
+  </div>
+  <div class="faq-item">
+    <h3><span class="mk" aria-hidden="true">Q</span><span>走行中にガタついたり、壊れたりしませんか</span></h3>
+    <div class="a"><span class="mk" aria-hidden="true">A</span><p>普通の道路を走る分には問題ありません。能登半島地震の後、輪島周辺のうねった道路を走り続けたときは、パイプが数か所外れました。現地ではめ直して、そのまま使えました。</p></div>
+  </div>
+  <div class="faq-item">
+    <h3><span class="mk" aria-hidden="true">Q</span><span>虫は入ってきませんか</span></h3>
+    <div class="a"><span class="mk" aria-hidden="true">A</span><p>窓に被せる網戸タイプのウインドーネット(4枚セット)を使っています。窓を開けて換気できて、虫が入ってきたことはありません。</p></div>
+  </div>
+  <div class="faq-item">
+    <h3><span class="mk" aria-hidden="true">Q</span><span>設計図や部品表はありますか</span></h3>
+    <div class="a"><span class="mk" aria-hidden="true">A</span><p><a href="#design">ベッドキットの設計図と部品表</a>に載せています。12月版の、右側フレーム1台分です。部品は、矢崎化工のイレクターパイプとジョイントで、公式通販サイトの<a href="https://yzk-shop.net/" target="_blank" rel="noopener noreferrer">ヤザキショッピング</a>で買えます。そのほかに聞きたいことは、<a href="#contact">質問フォーム</a>からどうぞ。</p></div>
+  </div>
+</section>
+
+<section id="author">
+  <h2>このページを書いた人について</h2>
+  <p>ランクル250のオーナーです。2024年4月にオーダーして、10月に納車されました。釣りの長距離移動と車中泊に使っていて、納車から約2年で約4.8万km走りました。</p>
+  <p>ベッドキットは、2024年11月に初版を自作して、12月に修正版を作りました。このページは、実際に作って、使い続けてきた経験をもとに書いています。</p>
+</section>
+
 <section id="contact">
   <h2>ベッドキットについての質問</h2>
   <p>作り方や、このページの内容について聞いてみたいことがある方は、こちらのフォームからどうぞ。返事が必要な場合は、メールアドレスなどの連絡先も書いてください。</p>
+  <p>私が作ったもので良ければ、お譲りすることもできます。問い合わせフォームからご相談ください。</p>
   <p class="ask"><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeGQr8TnhJT7swyHMz7apE_-k87i1MA2Q1uLOKetnZNSvw6-A/viewform" target="_blank" rel="noopener noreferrer">質問フォームを開く</a></p>
 </section>
 
